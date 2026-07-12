@@ -1,156 +1,262 @@
-# Blockchain Explorer and Smart Contract Demo
+# Blockchain Assessment Platform
 
-This repository is a compact full-stack demo for exploring blockchain concepts, interacting with a simplified chain, and reviewing a basic Solidity token contract.
+A full stack blockchain application built with **React**, **Express.js**, and **JavaScript** that demonstrates the core concepts of blockchain technology, including wallet generation, transaction processing, proof of work mining, blockchain validation, and persistent storage.
 
-It combines:
-- a layered Express backend for a simplified blockchain
-- a React-based explorer for interacting with the chain
-- a Solidity smart contract example for assessment and deployment discussion
-- a persistence layer so the chain can survive restarts
+This project was developed as a technical assessment to showcase backend architecture, frontend integration, and blockchain fundamentals.
 
----
+## Features
 
-## What’s Included
+### Wallet Management
 
-### Backend
-- Express API with routes for chain, transactions, mining, balance, stats, and wallets
-- Blockchain domain model with block hashing, transaction validation, and mining logic
-- Persistence layer that saves blockchain state to a JSON file
-- Centralized middleware for error handling, logging, validation, and rate limiting
+* Generate public/private key wallet pairs
+* Manage multiple wallets
+* Select an active wallet
+* Display wallet balances
+* Copy wallet keys
+* Toggle private key visibility
 
-### Frontend
-- React dashboard to inspect blockchain state and mine blocks
-- Wallet creation panel for generating key material and checking balances
-- Transaction form for creating pending transactions
-- Polling-based refresh for near-real-time updates
+### Blockchain Transactions
 
-### Smart Contracts
-- Solidity contract example in [contracts/AssessmentToken.sol](contracts/AssessmentToken.sol)
-- Deployment script in [scripts/deploy-contract.js](scripts/deploy-contract.js)
+* Create transactions between wallets
+* Support external wallet addresses
+* Validate transactions before adding them to the blockchain
+* Track pending transactions
 
----
+### Mining
 
-## Project Structure
+* Proof of Work mining
+* Automatic mining rewards
+* Pending transaction confirmation
+* Dynamic mining availability
 
-```text
-hometask-blockchain/
+### Blockchain Explorer
+
+* View every block in the chain
+* Display block hashes
+* Display previous hashes
+* Display timestamps
+* Display nonce values
+* View all transactions contained in each block
+* Display mining reward transactions
+
+### Chain Validation
+
+* Blockchain integrity verification
+* Hash validation
+* Previous hash validation
+* Transaction signature verification
+* Chain status indicator
+
+### Persistence
+
+* Blockchain state automatically saved to disk
+* Blockchain restored after server restart
+* Wallet balances preserved
+
+
+# Tech Stack
+
+## Frontend
+
+* React
+* JavaScript
+* CSS
+* Axios
+
+## Backend
+
+* Node.js
+* Express.js
+
+## Blockchain
+
+* SHA-256 Hashing
+* Proof of Work
+* Elliptic Curve Cryptography (secp256k1)
+* Digital Signatures
+
+## Development Tools
+
+* Nodemon
+* ESLint
+
+
+# Project Structure
+.
 ├── config/
 ├── controllers/
-├── contracts/
 ├── middleware/
 ├── models/
 ├── routes/
-├── scripts/
 ├── services/
+├── utils/
+├── contracts/
 ├── src/
-├── tests/
-├── package.json
+│   ├── api/
+│   ├── components/
+│   ├── hooks/
+│   └── constants/
 ├── server.js
-└── README.md
-```
+└── package.json
+
+
+# Architecture
+
+The backend follows a layered architecture:
+
+Routes
+      ↓
+Controllers
+      ↓
+Models / Services
+      ↓
+Persistence
+
+Business logic is separated from routing to improve maintainability and readability.
+
+
+# API Endpoints
+
+## Blockchain
+
+| Method | Endpoint        | Description             |
+| ------ | --------------- | ----------------------- |
+| GET    | `/api/chain`    | Retrieve the blockchain |
+| GET    | `/api/stats`    | Blockchain statistics   |
+| GET    | `/api/validate` | Validate blockchain     |
+
+## Transactions
+
+| Method | Endpoint                    | Description          |
+| ------ | --------------------------- | -------------------- |
+| POST   | `/api/transactions`         | Create transaction   |
+| GET    | `/api/transactions`         | Get all transactions |
+| GET    | `/api/transactions/pending` | Pending transactions |
+
+## Mining
+
+| Method | Endpoint    | Description               |
+| ------ | ----------- | ------------------------- |
+| POST   | `/api/mine` | Mine pending transactions |
+
+## Wallets
+
+| Method | Endpoint                | Description        |
+| ------ | ----------------------- | ------------------ |
+| POST   | `/api/wallets`          | Generate wallet    |
+| GET    | `/api/balance/:address` | Get wallet balance |
 
 ---
 
-## Getting Started
+# Installation
 
-### Prerequisites
-- Node.js 18+
-- npm
+Clone the repository:
 
-### Install
+git clone https://github.com/mikeisresilient/blockchain-assessment.git
 
-```bash
+
+Move into the project:
+
+cd blockchain-assessment
+
+Install dependencies:
+
 npm install
-```
 
-### Configure environment
+Create your environment file
 
-```bash
 cp .env.example .env
-```
 
-If you do not have an .env.example file yet, create one with values such as:
 
-```env
-PORT=3002
-NODE_ENV=development
-BLOCKCHAIN_DIFFICULTY=2
-BLOCKCHAIN_MINING_REWARD=100
-INITIAL_MINER_ADDRESS=genesis-miner
-SEED_DEMO_DATA=true
-REACT_APP_API_URL=http://localhost:3002
-```
+# Running the Project
 
-### Run the app
+Start the React application:
 
-```bash
-# Terminal 1
 npm start
 
-# Terminal 2
+Start the backend server:
+
 npm run dev
-```
 
-The React app uses the proxy in [src/setupProxy.js](src/setupProxy.js) so browser requests to /api are forwarded to the backend.
+The application will be available at
 
----
+Frontend:
 
-## API Overview
+http://localhost:3000
 
-All API responses follow this pattern:
 
-```json
-{ "success": true, "message": "...", ... }
-```
+Backend:
 
-### Core endpoints
+http://localhost:3002
 
-| Method | Path | Description |
-|---|---|---|
-| GET | /api/chain | Return the full blockchain |
-| GET | /api/chain/valid | Return whether the chain is valid |
-| POST | /api/transactions | Add a pending transaction |
-| GET | /api/transactions/pending | View pending transactions |
-| POST | /api/mine | Mine the pending transactions |
-| GET | /api/balance/:address | Get an address balance |
-| GET | /api/stats | View chain and mining statistics |
-| POST | /api/wallets | Generate a wallet-like key pair |
-| GET | /api/wallets/:address | View a balance for a wallet address |
 
----
+# Typical Workflow
 
-## Smart Contract Notes
+1. Create one or more wallets.
+2. Select an active wallet.
+3. Create a transaction.
+4. Observe the pending transaction count.
+5. Mine a block.
+6. Receive the mining reward.
+7. Verify wallet balances.
+8. Explore the newly created block.
 
-The Solidity contract in [contracts/AssessmentToken.sol](contracts/AssessmentToken.sol) is a simple ERC-20-style token example. It demonstrates:
-- token supply initialization
-- balance tracking
-- transfer and approval flows
-- basic events
 
-It is intended as an assessment artifact and can be extended for more advanced scenarios.
+# Blockchain Concepts Demonstrated
 
----
+* Blockchain structure
+* Genesis block
+* SHA-256 hashing
+* Proof of Work
+* Mining rewards
+* Pending transactions
+* Chain validation
+* Digital signatures
+* Wallet generation
+* Public/private key cryptography
+* Persistent blockchain storage
 
-## Testing
 
-A basic regression suite is included in [tests/blockchain.test.js](tests/blockchain.test.js).
+# Future Improvements
 
-Run:
+* Wallet authentication
+* Peer-to-peer networking
+* Merkle trees
+* Adjustable mining difficulty
+* Transaction fees
+* REST API documentation
+* Docker support
+* Automated unit tests
+* Smart contract deployment using Hardhat
+* User authentication
 
-```bash
-node --test
-```
 
----
+# Assessment Objectives Covered
 
-## Known Limitations
+* Layered backend architecture
+* Blockchain implementation
+* Wallet generation
+* Transaction processing
+* Mining workflow
+* Blockchain persistence
+* React frontend integration
+* RESTful API design
+* Clean project structure
+* Documentation
 
-- The blockchain is still a simplified educational implementation, not a production-grade distributed ledger.
-- Wallet generation is demonstration-oriented and does not yet implement a full signing workflow end-to-end in the UI.
-- The smart contract is intentionally simple for assessment purposes.
 
----
+# Author
 
-## License
+**Michael Uchechukwu Ege**
 
-One More Game
+GitHub:
+
+https://github.com/mikeisresilient
+
+Other contact details:
+
+linktr.ee/mikeisresilient
+
+# License
+
+This project was developed as a technical assessment and is intended for educational and demonstration purposes.
