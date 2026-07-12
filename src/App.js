@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import BlockchainViewer from './components/BlockchainViewer';
@@ -13,12 +13,29 @@ import { mineBlock } from './api/blockchain.api';
 function App() {
   const { chain, stats, loading, error, refresh } = useBlockchain();
 
+  const [activeWallet, setActiveWallet] = useState(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("active-wallet");
+
+    if (saved) {
+      setActiveWallet(JSON.parse(saved));
+    }
+  }, []);
+
   const handleMine = async () => {
     try {
-      await mineBlock();
+      if (!activeWallet) {
+        alert("Please select an active wallet first.");
+        return;
+      }
+
+      await mineBlock(activeWallet.publicKey);
+
       await refresh();
+
     } catch (err) {
-      console.error('Mining failed:', err.message);
+      alert(err.message);
     }
   };
 
@@ -34,7 +51,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+
       <div className="app-container">
+
         {error && (
           <div className="error-banner">
             <p>{error}</p>
@@ -42,16 +61,33 @@ function App() {
         )}
 
         <div className="main-content">
+
           <div className="left-panel">
-            <StatsPanel stats={stats} onMine={handleMine} />
-            <WalletPanel />
-            <TransactionForm onTransactionAdded={refresh} />
+
+            <StatsPanel
+              stats={stats}
+              onMine={handleMine}
+            />
+
+            <WalletPanel
+              refreshTrigger={stats?.latestBlockHash}
+              activeWallet={activeWallet}
+              setActiveWallet={setActiveWallet}
+            />
+
+            <TransactionForm
+              activeWallet={activeWallet}
+              onTransactionAdded={refresh}
+            />
+
           </div>
 
           <div className="right-panel">
             <BlockchainViewer blockchain={chain} />
           </div>
+
         </div>
+
       </div>
     </div>
   );

@@ -42,12 +42,13 @@ const initializeBlockchain = async () => {
   }
 };
 
-initializeBlockchain();
+const blockchainReady = initializeBlockchain();
 
 module.exports = {
   get blockchain() {
     return blockchain;
   },
+  blockchainReady,
   Blockchain,
   Block,
   Transaction,

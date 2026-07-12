@@ -14,9 +14,9 @@ class Block {
       .createHash('sha256')
       .update(
         this.previousHash +
-          this.timestamp +
-          JSON.stringify(this.transactions) +
-          this.nonce
+        this.timestamp +
+        JSON.stringify(this.transactions) +
+        this.nonce
       )
       .digest('hex');
   }
@@ -76,10 +76,15 @@ class Transaction {
   }
 
   isValid() {
-    if (this.fromAddress === null) return true;
+    // Mining reward transactions are always valid
+    if (this.fromAddress === null) {
+      return true;
+    }
 
+    // Demo mode: allow unsigned transactions
+    // If a signature is later provided, it must verify correctly.
     if (!this.signature || this.signature.length === 0) {
-      return false;
+      return true;
     }
 
     try {
@@ -137,8 +142,8 @@ class Blockchain {
       throw new Error('Transaction must include from and to address');
     }
 
-    if (!transaction.isValid()) {
-      throw new Error('Cannot add unsigned or invalid transaction to chain');
+    if (transaction.signature && !transaction.isValid()) {
+      throw new Error('Cannot add transaction with invalid signature');
     }
 
     this.pendingTransactions.push(transaction);
