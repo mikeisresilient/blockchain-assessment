@@ -244,6 +244,134 @@ http://localhost:3002
 * Clean project structure
 * Documentation
 
+# HOW TO USE
+
+Once the frontend and backend servers are running, open your browser and navigate to:
+
+The application consists of four main sections:
+
+* Blockchain Statistics
+* Wallet Studio
+* Create Transaction
+* Blockchain Explorer
+
+## 1. Create Wallets
+
+Begin by creating at least two wallets.
+
+* Click **Create Wallet**.
+* A new wallet will be generated with:
+
+  * Public Key
+  * Private Key
+  * Balance
+  * Repeat the process to create multiple wallets.
+
+The newest wallet automatically becomes the active wallet.
+
+
+## 2. Select an Active Wallet
+
+Each wallet has a **Use Wallet** button.
+
+Click **Use Wallet** to choose the wallet that will send transactions and receive mining rewards.
+
+The active wallet is highlighted with an **ACTIVE** badge.
+
+
+## 3. Create a Transaction
+
+Navigate to the **Create Transaction** section.
+
+* The **From Address** is automatically filled using the active wallet.
+* Select another wallet from the **Recipient Wallet** dropdown or enter an external wallet address.
+* Enter an amount.
+* Click **Add Transaction**.
+
+The transaction is added to the pool of pending transactions.
+
+
+## 4. Mine Pending Transactions
+
+After creating a transaction:
+
+* The **Pending Transactions** count increases.
+* The **Mine Block** button becomes enabled.
+
+Click **Mine Block** to:
+
+* Confirm pending transactions.
+* Create a new block.
+* Receive the mining reward in the active wallet.
+
+If there are no pending transactions, the mining button is disabled.
+
+
+## 5. Verify Wallet Balances
+
+Return to **Wallet Studio**.
+
+After mining:
+
+* Sender balance decreases.
+* Recipient balance increases.
+* Mining reward is credited to the active wallet.
+
+Wallet balances update automatically.
+
+
+## 6. Explore the Blockchain
+
+The **Blockchain Explorer** displays every block in the chain.
+
+Each block shows:
+
+* Block Number
+* Hash
+* Previous Hash
+* Timestamp
+* Nonce
+* Transactions
+
+Mining reward transactions are clearly identified.
+
+
+## 7. Validate the Blockchain
+
+The **Blockchain Statistics** panel displays:
+
+* Chain Length
+* Pending Transactions
+* Mining Reward
+* Difficulty
+* Chain Status
+
+A successful workflow should show:
+
+* Pending Transactions = 0
+* Chain Status = ✓ Valid
+
+
+## Example Test Scenario
+
+To verify the application's core functionality:
+
+1. Create Wallet A.
+2. Create Wallet B.
+3. Select Wallet A as the active wallet.
+4. Create a transaction sending **25** coins to Wallet B.
+5. Confirm that **Pending Transactions** becomes **1**.
+6. Click **Mine Block**.
+7. Verify that:
+
+   * Wallet B receives **25** coins.
+   * The active wallet receives the mining reward.
+   * Pending Transactions returns to **0**.
+   * Chain Status remains **✓ Valid**.
+   * A new block appears in the Blockchain Explorer.
+
+
+
 
 # Author
 
