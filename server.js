@@ -49,9 +49,7 @@ app.use(errorHandler);
 const startServer = async () => {
   await blockchainReady;
 
-  const portToUse =
-    Number.parseInt(process.env.PORT || config.port, 10) || 3002;
-
+  const portToUse = config.port;
   process.env.PORT = String(portToUse);
   writePortFile(portToUse);
 
