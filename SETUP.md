@@ -52,7 +52,7 @@ After both servers start you should see:
 
 - **Terminal 1:** `webpack compiled successfully`
 - **Terminal 2:** `[INFO ] Server : http://localhost:3002`
-- **Browser:** The blockchain UI shows the genesis block and demo transactions
+- **Browser:** The application loads successfully and displays the blockchain explorer with the current blockchain state.
 
 ---
 
