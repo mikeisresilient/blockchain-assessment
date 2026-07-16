@@ -2,6 +2,10 @@
 
 A full stack blockchain application built with **React**, **Express.js**, and **JavaScript** that demonstrates the core concepts of blockchain technology, including wallet generation, transaction processing, proof of work mining, blockchain validation, and persistent storage.
 
+## Application Preview
+
+![Blockchain Assessment Platform](screenshot.jpeg)
+
 This project was developed as a technical assessment to showcase backend architecture, frontend integration, and blockchain fundamentals.
 
 ## Features
@@ -176,31 +180,47 @@ Install dependencies:
 
 npm install
 
-Create your environment file
+Create your environment file:
 
 cp .env.example .env
 
 
 # Running the Project
 
-Start the React application:
+Open **two terminal windows** inside the project directory.
 
+### Terminal 1 – React Frontend
+
+```bash
 npm start
+```
 
-Start the backend server:
-
-npm run dev
-
-The application will be available at
-
-Frontend:
+Runs the frontend at:
 
 http://localhost:3000
 
+### Terminal 2 – Express Backend
 
-Backend:
+```bash
+npm run dev
+```
+
+Runs the API at:
 
 http://localhost:3002
+
+
+## Blockchain Persistence
+
+The blockchain is automatically persisted to `blockchain.json`.
+
+If you want to start with a fresh blockchain, simply delete:
+
+```text
+blockchain.json
+```
+
+before starting the backend server.
 
 
 # Typical Workflow
@@ -270,7 +290,7 @@ The application consists of four main sections:
 
 ## 1. Create Wallets
 
-Begin by creating at least two wallets.
+Begin by creating two or more wallets.
 
 * Click **Create Wallet**.
 * A new wallet will be generated with:
