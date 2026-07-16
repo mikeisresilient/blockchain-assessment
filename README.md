@@ -148,6 +148,19 @@ Business logic is separated from routing to improve maintainability and readabil
 
 ---
 
+# Prerequisites
+
+Before running the project, ensure the following are installed:
+
+- Node.js v22.x (tested with v22.23.1)
+- npm v10.x (tested with v10.9.8)
+- Git
+
+You can verify your installation using:
+
+node -v
+npm -v
+
 # Installation
 
 Clone the repository:
